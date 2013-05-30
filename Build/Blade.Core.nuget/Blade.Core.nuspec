@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Blade.Core</id>
+    <version>1.5.6</version>
+    <authors>Kam Figy</authors>
+    <owners>ISITE Design</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/kamsar/Blade</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+		Blade is a presentation framework for Sitecore 7. It enables excellent separation of concerns, easy rendering debugging, and pervasive use of the Razor templating language. Fully compatible with template-to-object mappers via simple extension.
+		
+		This package contains the core library, which is appropriate for library references. Use the Blade package for web projects, as it includes config and items.
+	</description>
+	<summary>Blade is a presentation framework for Sitecore 7. This package contains the core library, which is appropriate for library references. Use the Blade package for web projects, as it includes config and items.</summary>
+    <releaseNotes>Fixes a bug that would cause unxpected data source resolution to occur if a data source that pointed to an invalid item path or ID was present</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>sitecore</tags>
+    <dependencies>
+		<dependency id="RazorEngine" version="3.2.0" />
+		<dependency id="Microsoft.AspNet.WebPages" version="2.0" />
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="..\..\Source\Blade\bin\release\Blade.*" target="lib\net45" />
+	<file src="..\..\Source\Blade\**\*.cs" target="src" />
+  </files>
+</package>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Blade.Samples</id>
+    <version>1.5.6</version>
+    <authors>Kam Figy</authors>
+    <owners>ISITE Design</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/kamsar/Blade</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+		An example Razor rendering and presenter using Blade. Requires Sitecore Rocks to be installed and connected for successful installation.
+		
+		After installation, there will be a sample rendering in Sitecore that you can assign to an item for playing around.
+	</description>
+    <releaseNotes>Fixed incorrect serialization path for items</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>sitecore</tags>
+    <dependencies>
+		<dependency id="Blade" version="1.5.6" />
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="content\**" target="content" />
+	<file src="serialization\**" target="serialization" />
+	<file src="..\..\Dependencies\Tools\Sitecore.NuGet\*" target="tools" />
+  </files>
+</package>

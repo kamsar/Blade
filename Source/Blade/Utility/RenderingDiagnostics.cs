@@ -49,8 +49,26 @@ namespace Blade.Utility
 		}
 
 		private static readonly Lazy<bool> DebugEnabled = new Lazy<bool>(() => HttpContext.Current.IsDebuggingEnabled);
+		public static bool DiagnosticsEnabledForThisRequest
+		{
+			get
+			{
+				var value = HttpContext.Current.Items["RENDERING_DIAGNOSTICS_ENABLED"];
+				if (value == null || value.ToString() == bool.TrueString) return true;
 
-		protected virtual bool DiagnosticsEnabled { get { return DebugEnabled.Value; } }
+				return false;
+			}
+			set { HttpContext.Current.Items["RENDERING_DIAGNOSTICS_ENABLED"] = value; }
+		}
+
+		protected virtual bool DiagnosticsEnabled
+		{
+			get
+			{
+				if (!DiagnosticsEnabledForThisRequest) return false;
+				return DebugEnabled.Value;
+			}
+		}
 
 		protected virtual void RenderingStartDiagnostics()
 		{
@@ -95,6 +113,8 @@ namespace Blade.Utility
 
 		protected virtual void RenderingEndDiagnostics()
 		{
+			if (!DiagnosticsEnabled) return;
+
 			// <!-- End Rendering "~/bar/Foo.ascx" -->
 			_timer.Stop();
 			_writer.Write("<!-- End Rendering {0}, render took {1}ms -->", _renderingName, _timer.ElapsedMilliseconds);

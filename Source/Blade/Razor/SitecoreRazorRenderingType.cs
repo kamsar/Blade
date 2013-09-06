@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using Sitecore.Web.UI;
 using System.Collections.Specialized;
 using System.Web.UI;
 using Blade.Views;
+using System.Web.Compilation;
 
 namespace Blade.Razor
 {
@@ -35,17 +37,13 @@ namespace Blade.Razor
 		{
 			Sitecore.Diagnostics.Assert.IsNotNullOrEmpty(viewPath, "ViewPath cannot be empty. The Rendering item in Sitecore needs to have a view path set.");
 
-			Type viewModelType = RazorViewCache.GetViewModelType(viewPath);
+			Type viewType = BuildManager.GetCompiledType(viewPath);
+			Type viewModelType = viewType.GetProperties().First(x => x.PropertyType != typeof (object) && x.Name == "Model").PropertyType;
 
 			var renderingType = typeof(RazorViewShim<>).MakeGenericType(viewModelType);
 
-			var shim = Activator.CreateInstance(renderingType) as IRazorViewShim;
-			var template = RazorViewCache.GetCompiledTemplate(viewPath);
+			var shim = (IRazorViewShim)Activator.CreateInstance(renderingType);
 
-			// make the template aware of its parent control
-			((IBladeTemplateMetadata)template).RenderingShim = shim;
-
-			shim.Template = template;
 			shim.ViewPath = viewPath;
 
 			return shim as Control;

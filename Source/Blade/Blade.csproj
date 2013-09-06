@@ -42,10 +42,6 @@
       <Private>True</Private>
       <HintPath>..\..\Dependencies\Libraries\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="RazorEngine, Version=3.3.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\RazorEngine.3.3.0\lib\net40\RazorEngine.dll</HintPath>
-    </Reference>
     <Reference Include="Sitecore.Buckets">
       <HintPath>..\..\Dependencies\Libraries\Sitecore\Sitecore.Buckets.dll</HintPath>
     </Reference>
@@ -65,6 +61,10 @@
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -95,6 +95,8 @@
     <Compile Include="Pipelines\ResolveRenderingDataSource\HandleStaticItems.cs" />
     <Compile Include="Pipelines\ResolveRenderingDataSource\ResolveRenderingDataSourceArgs.cs" />
     <Compile Include="Pipelines\ResolveRenderingDataSource\ResolveRenderingDataSourcePipelineProcessor.cs" />
+    <Compile Include="Razor\MetadataConstants.cs" />
+    <Compile Include="Razor\ViewRenderer.cs" />
     <Compile Include="SitecoreListPresenter.cs" />
     <Compile Include="PresenterResolver.cs" />
     <Compile Include="IPresenter.cs" />
@@ -102,15 +104,8 @@
     <Compile Include="IView.cs" />
     <Compile Include="BasePresenterFactory.cs" />
     <Compile Include="PresenterResolutionException.cs" />
-    <Compile Include="Razor\RazorParseException.cs" />
-    <Compile Include="Razor\Helpers\BladeHtmlHelper.cs" />
-    <Compile Include="Razor\IBladeTemplateMetadata.cs" />
-    <Compile Include="Razor\RazorCompileException.cs" />
     <Compile Include="Razor\RazorRendering.cs" />
-    <Compile Include="Razor\RazorViewCache.cs" />
     <Compile Include="Razor\SitecoreRazorRenderingType.cs" />
-    <Compile Include="Razor\StringLock.cs" />
-    <Compile Include="Razor\Templating\BladeTemplateService.cs" />
     <Compile Include="Razor\Configuration\BladeTemplateServiceConfiguration.cs" />
     <Compile Include="SitecorePresenter.cs" />
     <Compile Include="Utility\DataSourceHelper.cs" />
@@ -124,7 +119,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\WebControlView.cs" />
-    <Compile Include="Utility\RazorUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\TypeCollectionUtility.cs" />
   </ItemGroup>

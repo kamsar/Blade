@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Blade</id>
-    <version>1.5.6</version>
+    <version>2.0.0</version>
     <authors>Kam Figy</authors>
     <owners>ISITE Design</owners>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
@@ -14,11 +14,11 @@
 		This package includes both the core library and the configuration files and serialized items for Sitecore. It is appropriate for a web project, whereas the Blade.Core package is appropriate for library references.
 	</description>
 	<summary>Blade is a presentation framework for Sitecore 7. This package includes both the core library and the configuration files and serialized items for Sitecore. It is appropriate for a web project, whereas the Blade.Core package is appropriate for library references.</summary>
-    <releaseNotes>Fixed dependencies for core libraries</releaseNotes>
+    <releaseNotes>Switched Razor engines to MVC instead of RazorEngine. Causes some breaking changes. Now depends on MVC4 instead of just Razor.</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>sitecore</tags>
     <dependencies>
-		<dependency id="Blade.Core" version="1.5.6" />
+		<dependency id="Blade.Core" version="2.0.0" />
     </dependencies>
   </metadata>
   <files>

@@ -89,6 +89,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\ConfigurationPresenterFactory.cs" />
+    <Compile Include="IXmlHttpRequestPresenter.cs" />
+    <Compile Include="IPostBackPresenter.cs" />
     <Compile Include="Pipelines\ResolveRenderingDataSource\HandleSearch.cs" />
     <Compile Include="Pipelines\ResolveRenderingDataSource\HandleContextDataSource.cs" />
     <Compile Include="Pipelines\ResolveRenderingDataSource\HandleSitecoreQuery.cs" />
@@ -106,7 +108,6 @@
     <Compile Include="PresenterResolutionException.cs" />
     <Compile Include="Razor\RazorRendering.cs" />
     <Compile Include="Razor\SitecoreRazorRenderingType.cs" />
-    <Compile Include="Razor\Configuration\BladeTemplateServiceConfiguration.cs" />
     <Compile Include="SitecorePresenter.cs" />
     <Compile Include="Utility\DataSourceHelper.cs" />
     <Compile Include="Utility\RenderingDiagnostics.cs" />

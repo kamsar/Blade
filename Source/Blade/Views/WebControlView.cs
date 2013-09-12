@@ -1,5 +1,7 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.UI;
 using Sitecore.Web.UI;
 using Blade.Utility;
@@ -63,6 +65,23 @@ namespace Blade.Views
 			}
 		}
 
+		IPresenter<TModel> _presenter;
+		/// <summary>
+		/// Gets the presenter used for the control. Returns null if no presenter
+		/// </summary>
+		private IPresenter<TModel> Presenter
+		{
+			get
+			{
+				if (_presenter == null)
+				{
+					_presenter = PresenterFactory.GetPresenter<TModel>();
+				}
+
+				return _presenter;
+			}
+		}
+
 		/// <summary>
 		/// Gets the current datasource of the control. This is either:
 		/// 1. A custom datasource parameter set in the Sitecore UI
@@ -75,9 +94,9 @@ namespace Blade.Views
 		{
 			get 
 			{
-				if (_model == null)
+				if (_model == null && Presenter != null)
 				{
-					_model = PresenterFactory.GetPresenter<TModel>().GetModel(this);
+					_model = Presenter.GetModel(this);
 				}
 
 				return _model;
@@ -103,6 +122,26 @@ namespace Blade.Views
 			{
 				base.DataSource = value;
 				_model = null; // decache the model since the datasource got updated
+				_presenter = null;
+			}
+		}
+
+		protected override void OnLoad(EventArgs e)
+		{
+			base.OnLoad(e);
+
+			// check if we have a postback OR XHR and process that with the presenter if it supports it
+			if (new HttpRequestWrapper(HttpContext.Current.Request).IsAjaxRequest())
+			{
+				var xhrPresenter = Presenter as IXmlHttpRequestPresenter<TModel>;
+				if (xhrPresenter != null)
+					xhrPresenter.HandleXmlHttpRequest(this, Model, ControllerContext);
+			}
+			else if (HttpContext.Current.Request.HttpMethod == "POST")
+			{
+				var postPresenter = Presenter as IPostBackPresenter<TModel>;
+				if (postPresenter != null)
+					postPresenter.HandlePostBack(this, Model, ControllerContext);
 			}
 		}
 
@@ -147,6 +186,13 @@ namespace Blade.Views
 				return _renderingParameters;
 			}
 		}
+
+		/// <summary>
+		/// Keeps a MVC ControllerContext alive, if we have one, for the duration of the request.
+		/// This is used to persist the ModelState validation information between the Presenter and View
+		/// for Razor renderings.
+		/// </summary>
+		protected ControllerContext ControllerContext { get; set; }
 
 		[SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Hides implementation details from callers who need not be confronted with them")]
 		NameValueCollection IView.ViewProperties { get { return RenderingParameters; } }

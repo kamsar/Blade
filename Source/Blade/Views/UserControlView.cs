@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.UI;
 using Sitecore.Web.UI.WebControls;
 using Blade.Utility;
@@ -13,14 +14,32 @@ namespace Blade.Views
 	{
 		protected readonly IPresenterFactory PresenterFactory;
 
-		protected UserControlView() : this(PresenterResolver.Current)
+		protected UserControlView()
+			: this(PresenterResolver.Current)
 		{
-			
+
 		}
 
 		protected UserControlView(IPresenterFactory presenterFactory)
 		{
 			PresenterFactory = presenterFactory;
+		}
+
+		IPresenter<TModel> _presenter;
+		/// <summary>
+		/// Gets the presenter used for the control. Returns null if no presenter
+		/// </summary>
+		private IPresenter<TModel> Presenter
+		{
+			get
+			{
+				if (_presenter == null)
+				{
+					_presenter = PresenterFactory.GetPresenter<TModel>();
+				}
+
+				return _presenter;
+			}
 		}
 
 		TModel _model;
@@ -36,15 +55,15 @@ namespace Blade.Views
 		{
 			get
 			{
-				if (_model == null)
+				if (_model == null && Presenter != null)
 				{
-					_model = PresenterFactory.GetPresenter<TModel>().GetModel(this);
+					_model = Presenter.GetModel(this);
 				}
 
 				return _model;
 			}
 
-			// used to inject arbitrary models for testing the view
+			// used to inject arbitrary models for testing the view via inherited stub classes
 			set
 			{
 				_model = value;
@@ -70,6 +89,7 @@ namespace Blade.Views
 			{
 				_stringDataSource = value;
 				_model = null; // decache the model since the datasource got updated
+				_presenter = null;
 			}
 		}
 
@@ -81,7 +101,7 @@ namespace Blade.Views
 		/// <summary>
 		/// Checks if the page is being viewed in preview mode
 		/// </summary>
-		protected bool IsPreviewing { get { return Sitecore.Context.PageMode.IsPreview; } } 
+		protected bool IsPreviewing { get { return Sitecore.Context.PageMode.IsPreview; } }
 
 		/// <summary>
 		/// Gets the Sublayout web control that Sitecore wraps user controls in. Useful for manipulating caching settings.
@@ -121,7 +141,7 @@ namespace Blade.Views
 			}
 		}
 
-		[SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification="Hides implementation details from callers who need not be confronted with them")]
+		[SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Hides implementation details from callers who need not be confronted with them")]
 		NameValueCollection IView.ViewProperties { get { return RenderingParameters; } }
 
 		#region Caching Parameters
@@ -143,14 +163,14 @@ namespace Blade.Views
 			set { if (SublayoutContainer != null) SublayoutContainer.VaryByDevice = value; }
 		}
 
-		[SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Login", Justification="Sitecore convention")]
+		[SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Login", Justification = "Sitecore convention")]
 		protected bool VaryByLogin
 		{
 			get { return (SublayoutContainer ?? new Sublayout()).VaryByLogin; }
 			set { if (SublayoutContainer != null) SublayoutContainer.VaryByLogin = value; }
 		}
 
-		[SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Parm", Justification="Sitecore convention")]
+		[SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Parm", Justification = "Sitecore convention")]
 		protected bool VaryByParm
 		{
 			get { return (SublayoutContainer ?? new Sublayout()).VaryByParm; }
@@ -198,6 +218,20 @@ namespace Blade.Views
 				base.OnLoad(e);
 			else
 				OnLoadWhenModelIsNull(e);
+
+			// check if we have a postback OR XHR and process that with the presenter if it supports it
+			if (new HttpRequestWrapper(Request).IsAjaxRequest())
+			{
+				var xhrPresenter = Presenter as IXmlHttpRequestPresenter<TModel>;
+				if(xhrPresenter != null)
+					xhrPresenter.HandleXmlHttpRequest(this, Model, null);
+			}
+			else if (Request.HttpMethod == "POST")
+			{
+				var postPresenter = Presenter as IPostBackPresenter<TModel>;
+				if(postPresenter != null)
+					postPresenter.HandlePostBack(this, Model, null);
+			}
 		}
 
 		protected virtual void OnPreRenderWhenModelIsNull(EventArgs e)

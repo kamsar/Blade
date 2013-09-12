@@ -1,8 +1,6 @@
-﻿using System;
-using Blade.Razor;
+﻿using Blade.Razor;
 using Sitecore.Diagnostics;
 using Blade.Utility;
-using System.Web.Compilation;
 using System.Collections.Generic;
 
 namespace Blade.Views
@@ -14,6 +12,14 @@ namespace Blade.Views
 	public class RazorViewShim<TModel> : WebControlView<TModel>, IRazorViewShim
 		where TModel : class
 	{
+		public RazorViewShim()
+		{
+			ControllerContext = ViewRenderer.CreateController<EmptyController>().ControllerContext;
+		}
+
+		/// <summary>
+		/// Virtual path to the Razor file to render
+		/// </summary>
 		public string ViewPath { get; set; }
 
 		protected override void RenderModel(System.Web.UI.HtmlTextWriter writer)
@@ -23,7 +29,7 @@ namespace Blade.Views
 			var viewData = new Dictionary<string, object>();
 			viewData[MetadataConstants.RenderingParametersViewDataKey] = RenderingParameters;
 
-			var renderer = new ViewRenderer();
+			var renderer = new ViewRenderer(ControllerContext);
 			var result = renderer.RenderPartialViewToString(ViewPath, Model, viewData);
 
 			writer.Write(result);

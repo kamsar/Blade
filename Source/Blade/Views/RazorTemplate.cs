@@ -11,7 +11,14 @@ namespace Blade.Views
 	/// </summary>
 	public class RazorTemplate : WebControl
 	{
+		/// <summary>
+		/// Virtual path to the Razor file to render
+		/// </summary>
 		public string Path { get; set; }
+
+		/// <summary>
+		/// The Model for the Razor view. The model will be null if this is unset.
+		/// </summary>
 		public object Model { get; set; }
 
 		protected override void DoRender(HtmlTextWriter output)
@@ -22,7 +29,7 @@ namespace Blade.Views
 
 				var renderer = new ViewRenderer();
 				var result = renderer.RenderPartialViewToString(Path, Model);
-
+				
 				output.Write(result);
 			}
 		}

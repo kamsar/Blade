@@ -10,19 +10,9 @@ using System.Diagnostics.CodeAnalysis;
 namespace Blade.Views
 {
 	/// <summary>
-	/// Provides basic logic to content rendering controls to assist in resolving their
-	/// data source item and the entity version of their data source. Also by default provides
-	/// and EditFrame implementation for the control in PageEdit mode.
+	/// Base class for a WebControl rendering that uses a Blade presenter
 	/// </summary>
-	/// <remarks>
-	/// By default when using this control,
-	/// - ViewState is disabled
-	/// - If the datasource cannot be converted to the generic entity type specified, the control will have its visibility set to false and Render() will not be called.
-	/// - Cacheable is true with VaryByData enabled
-	/// - An EditFrame will be rendered around the content of the control when in PageEdit mode
-	/// 
-	/// To disable any of these functionalities, implement a constructor in your derived class and set the properties as desired.
-	/// </remarks>
+	/// <typeparam name="TModel">The expected model type for the control</typeparam>
 	[ParseChildren(false)]
 	public abstract class WebControlView<TModel> : WebControl, IView
 		where TModel : class

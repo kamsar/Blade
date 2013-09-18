@@ -3,6 +3,9 @@ using System.Web.UI;
 
 namespace Blade.Views
 {
+	/// <summary>
+	/// Global definition of how to render a control when the model is null (across web controls, user controls, and razor controls)
+	/// </summary>
 	internal static class NullModelHelper
 	{
 		internal static void RenderNullModelMessage(HtmlTextWriter writer, string viewName, string dataSource, Type presenterType, Type modelType)

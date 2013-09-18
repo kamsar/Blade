@@ -9,6 +9,9 @@ namespace Blade.Pipelines.ResolveRenderingDataSource
 {
 	/// <summary>
 	/// Handles data sources that are defined using index search syntax
+	/// TODO: when Update-2 comes out, supposedly the UIFilterHelpers.ParseDatasourceString will become generic.
+	/// If that happens, this pipeline should be refactored to allow returning a strongly typed data source item in addition to
+	/// the Item result so as to avoid having to pre-convert search results to Items.
 	/// </summary>
 	public class HandleSearch : ResolveRenderingDataSourcePipelineProcessor
 	{

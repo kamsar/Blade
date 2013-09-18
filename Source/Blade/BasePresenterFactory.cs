@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Blade
 {
 	/// <summary>
-	/// Handles the resolution of presenters
+	/// Handles the resolution of presenters for a given model type
 	/// </summary>
 	public abstract class BasePresenterFactory : IPresenterFactory
 	{

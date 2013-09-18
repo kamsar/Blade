@@ -8,8 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Blade.Configuration
 {
 	/// <summary>
-	/// Provides a list of all types present in specified assembly names. This provider is appropriate when Synthesis classes and presenters are in a known set of places.
-	/// It is also much faster than AppDomainTypeListProvider.
+	/// This presenter factory acquires possible presenter types by spelunking types in loaded assemblies that implement IPresenter.
 	/// </summary>
 	public class ConfigurationPresenterFactory : BasePresenterFactory
 	{
@@ -35,7 +34,8 @@ namespace Blade.Configuration
 
 			if (_assemblies.Count > 0)
 				assemblies = _assemblies;
-			else assemblies = AppDomain.CurrentDomain.GetAssemblies();
+			else 
+				assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
 			return assemblies.SelectMany(delegate(Assembly x)
 							{

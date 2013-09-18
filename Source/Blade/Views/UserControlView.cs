@@ -9,6 +9,10 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Blade.Views
 {
+	/// <summary>
+	/// Base class for a User Control (sublayout) rendering that uses a Blade presenter
+	/// </summary>
+	/// <typeparam name="TModel">The expected model type for the control</typeparam>
 	public abstract class UserControlView<TModel> : UserControl, IView
 		where TModel : class
 	{

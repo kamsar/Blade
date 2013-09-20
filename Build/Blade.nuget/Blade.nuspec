@@ -23,7 +23,7 @@
   </metadata>
   <files>
 	<file src="..\..\Source\Blade\Blade.config" target="content\App_Config\Include" />
-	<file src="web.config.transform" target="content" />
+	<file src="web.config.install.xdt" target="content" />
 	<file src="serialization\**" target="serialization" />
 	<file src="..\..\Dependencies\Tools\Sitecore.NuGet\*" target="tools" />
   </files>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0"?>
+
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+	<configSections>
+		<sectionGroup xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" name="system.web.webPages.razor" type="System.Web.WebPages.Razor.Configuration.RazorWebSectionGroup, System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35">
+			<section xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" name="host" type="System.Web.WebPages.Razor.Configuration.HostSection, System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" />
+			<section xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" name="pages" type="System.Web.WebPages.Razor.Configuration.RazorPagesSection, System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" />
+		</sectionGroup>
+	</configSections>
+	
+	<appSettings>
+		<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)" key="UnobtrusiveJavaScriptEnabled" value="true" />
+	</appSettings>
+	
+	<system.web>
+		<pages>
+			<controls>
+				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(tagPrefix,namespace,assembly)" tagPrefix="blade" namespace="Blade.Views" assembly="Blade" />
+			</controls>
+		</pages>
+	</system.web>
+	
+	<system.web.webPages.razor xdt:Transform="InsertIfMissing">
+		<host xdt:Transform="Replace" factoryType="System.Web.Mvc.MvcWebRazorHostFactory, System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
+		<pages xdt:Transform="InsertIfMissing" pageBaseType="Blade.Razor.RazorRendering">
+			<namespaces xdt:Transform="InsertIfMissing">
+				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="System.Web.Mvc" />
+                <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="System.Web.Mvc.Ajax" />
+                <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="System.Web.Mvc.Html" />
+				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="Blade.Razor.Helpers"/>
+				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="Blade.Razor"/>
+				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="System.Collections.Generic" />
+				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="System.Linq" />
+				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="System" />
+			</namespaces>
+		</pages>
+	</system.web.webPages.razor>
+
+	<system.web>
+		<compilation xdt:Transform="InsertIfMissing">
+			<buildProviders xdt:Transform="InsertIfMissing">
+				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(type,extension)" extension=".cshtml" type="System.Web.WebPages.Razor.RazorBuildProvider, System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
+			</buildProviders>
+			<assemblies xdt:Transform="InsertIfMissing">
+                <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(assembly)" assembly="System.Web.Abstractions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+                <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(assembly)" assembly="System.Web.Routing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
+                <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(assembly)" assembly="System.Data.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+                <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(assembly)" assembly="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+            </assemblies>
+		</compilation>
+	</system.web>
+</configuration>

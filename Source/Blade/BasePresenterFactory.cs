@@ -56,6 +56,9 @@ namespace Blade
 		protected virtual IPresenter<TModel> ResolvePresenter<TModel>()
 			where TModel : class
 		{
+			if(typeof(TModel) == typeof(object))
+				throw new ArgumentException("Model type cannot be object (or dynamic) because that would match any presenter (any type can be assigned to object).");
+
 			Type presenterInterfaceType = typeof(IPresenter<TModel>);
 			Type presenterType;
 

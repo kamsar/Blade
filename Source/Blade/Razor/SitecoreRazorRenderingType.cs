@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using Sitecore.Web.UI;
 using System.Collections.Specialized;
 using System.Web.UI;
@@ -38,7 +39,8 @@ namespace Blade.Razor
 			Sitecore.Diagnostics.Assert.IsNotNullOrEmpty(viewPath, "ViewPath cannot be empty. The Rendering item in Sitecore needs to have a view path set.");
 
 			Type viewType = BuildManager.GetCompiledType(viewPath);
-			Type viewModelType = viewType.GetProperties().First(x => x.PropertyType != typeof (object) && x.Name == "Model").PropertyType;
+			PropertyInfo typedModelProperty = viewType.GetProperties().FirstOrDefault(x => x.PropertyType != typeof (object) && x.Name == "Model");
+			Type viewModelType = typedModelProperty != null ? typedModelProperty.PropertyType : typeof (object);
 
 			var renderingType = typeof(RazorViewShim<>).MakeGenericType(viewModelType);
 

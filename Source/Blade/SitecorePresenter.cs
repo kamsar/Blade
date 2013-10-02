@@ -16,14 +16,27 @@ namespace Blade
 	/// <typeparam name="TModel">Type of the ViewModel that will be returned to the view</typeparam>
 	public abstract class SitecorePresenter<TModel> : IPresenter<TModel>, IPostBackPresenter<TModel>, IXmlHttpRequestPresenter<TModel>
 	{
-		public TModel GetModel(IView view)
+		private Item _dataSource;
+
+		public virtual TModel GetModel(IView view)
 		{
-			Item dataSource = DataSourceHelper.ResolveDataSource(view.DataSource, Sitecore.Context.Item);
+			Item dataSource = _dataSource ?? DataSourceHelper.ResolveDataSource(view.DataSource, Sitecore.Context.Item);
 
 			return GetModel(view, dataSource);
 		}
 
 		protected abstract TModel GetModel(IView view, Item dataSource);
+		
+		/// <summary>
+		/// Overrides normal data source resolution and provides a static data source item.
+		/// Useful for testing, if you must use Item for testing for some reason.
+		/// It'd be better to use SynthesisPresenter for testing since it does not need the Sitecore API however.
+		/// </summary>
+		/// <param name="item">The item to set the data source of the presenter to</param>
+		public void SetDataSource(Item item)
+		{
+			_dataSource = item;
+		}
 
 		/// <summary>
 		/// Handles post back to the view. This is called after GetModel(), but may affect the values of the model. No model binding is performed on the model.

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Blade.Core</id>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <authors>Kam Figy</authors>
     <owners>ISITE Design</owners>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
@@ -14,7 +14,7 @@
 		This package contains the core library, which is appropriate for library references. Use the Blade package for web projects, as it includes config and items.
 	</description>
 	<summary>Blade is a presentation framework for Sitecore 7. This package contains the core library, which is appropriate for library references. Use the Blade package for web projects, as it includes config and items.</summary>
-    <releaseNotes>Switched Razor engines to MVC instead of RazorEngine. Causes some breaking changes. Added model binding support.</releaseNotes>
+    <releaseNotes>Bugfix release</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>sitecore</tags>
     <dependencies>

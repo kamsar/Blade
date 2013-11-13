@@ -121,13 +121,13 @@ namespace Blade.Views
 			base.OnLoad(e);
 
 			// check if we have a postback OR XHR and process that with the presenter if it supports it
-			if (new HttpRequestWrapper(HttpContext.Current.Request).IsAjaxRequest())
+			if (ViewContext.Request.IsAjaxRequest())
 			{
 				var xhrPresenter = Presenter as IXmlHttpRequestPresenter<TModel>;
 				if (xhrPresenter != null)
 					xhrPresenter.HandleXmlHttpRequest(this, Model, ControllerContext);
 			}
-			else if (HttpContext.Current.Request.HttpMethod == "POST")
+			else if (ViewContext.Request.HttpMethod == "POST")
 			{
 				var postPresenter = Presenter as IPostBackPresenter<TModel>;
 				if (postPresenter != null)
@@ -186,5 +186,11 @@ namespace Blade.Views
 
 		[SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Hides implementation details from callers who need not be confronted with them")]
 		NameValueCollection IView.ViewProperties { get { return RenderingParameters; } }
-	}
+
+
+        public HttpContextBase ViewContext
+        {
+            get { return new HttpContextWrapper(Context); }
+        }
+    }
 }

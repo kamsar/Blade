@@ -46,7 +46,13 @@ namespace Blade.Views
 		/// <param name="output">The HtmlTextWriter for the Page/Response</param>
 		protected override void DoRender(HtmlTextWriter output)
 		{
-			using (new RenderingDiagnostics(output, GetType().FullName, Cacheable, VaryByData, VaryByDevice, VaryByLogin, VaryByParm, VaryByQueryString, VaryByUser, ClearOnIndexUpdate, GetCachingID()))
+            string CachingID = null;
+            try
+            {
+                CachingID = GetCachingID();
+            }
+            catch { }
+			using (new RenderingDiagnostics(output, GetType().FullName, Cacheable, VaryByData, VaryByDevice, VaryByLogin, VaryByParm, VaryByQueryString, VaryByUser, ClearOnIndexUpdate, CachingID))
 			{
 				if (Model != null)
 					RenderModel(output);

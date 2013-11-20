@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Blade
 {
@@ -68,7 +69,7 @@ namespace Blade
 				// iterate over all loaded types and find valid presenters for this type
 				foreach (var presenter in TypeLookup)
 				{
-					if (presenterInterfaceType.IsAssignableFrom(presenter))
+                    if (presenter.FindInterfaces((x, o) => x == presenterInterfaceType, null).Any())
 					{
 						presenterType = presenter;
 						break;

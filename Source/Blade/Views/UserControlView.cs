@@ -271,5 +271,10 @@ namespace Blade.Views
 					RenderWhenModelIsNull(writer);
 			}
 		}
-	}
+
+        public HttpContextBase ViewContext
+        {
+            get { return new HttpContextWrapper(Context); }
+        }
+    }
 }

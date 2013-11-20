@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Blade.Samples</id>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <authors>Kam Figy</authors>
     <owners>ISITE Design</owners>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
@@ -13,11 +13,11 @@
 		
 		After installation, there will be a sample rendering in Sitecore that you can assign to an item for playing around.
 	</description>
-    <releaseNotes>Fixed incorrect serialization path for items</releaseNotes>
+    <releaseNotes>Updated to latest Sitecore NuGet</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>sitecore</tags>
     <dependencies>
-		<dependency id="Blade" version="2.0.0" />
+		<dependency id="Blade" version="2.1" />
     </dependencies>
   </metadata>
   <files>

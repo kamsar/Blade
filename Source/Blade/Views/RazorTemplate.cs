@@ -33,5 +33,10 @@ namespace Blade.Views
 				output.Write(result);
 			}
 		}
+
+		protected override string GetCachingID()
+		{
+			return Path;
+		}
 	}
 }

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Blade.Core</id>
-    <version>2.1.0</version>
+    <version>$version$</version>
     <authors>Kam Figy</authors>
     <owners>ISITE Design</owners>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
@@ -15,17 +15,9 @@
 	</description>
 	<summary>Blade is a presentation framework for Sitecore 7. This package contains the core library, which is appropriate for library references. Use the Blade package for web projects, as it includes config and items.</summary>
     <releaseNotes>Migrated to MVC5/Razor 3, Sitecore NuGet 1.0</releaseNotes>
-    <copyright>Copyright 2013</copyright>
+    <copyright>Copyright 2014 Kam Figy/ISITE Design</copyright>
     <tags>sitecore</tags>
-    <dependencies>
-		<dependency id="Microsoft.AspNet.Mvc" version="5.0" />
-		<dependency id="Microsoft.AspNet.Razor" version="3.0" />
-		<dependency id="Microsoft.AspNet.WebPages" version="3.0" />
-		<dependency id="Microsoft.Web.Infrastructure" version="1.0" />
-    </dependencies>
   </metadata>
   <files>
-	<file src="..\..\Source\Blade\bin\release\Blade.*" target="lib\net45" />
-	<file src="..\..\Source\Blade\**\*.cs" target="src" />
   </files>
 </package>

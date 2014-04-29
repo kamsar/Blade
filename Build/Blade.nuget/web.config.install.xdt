@@ -28,7 +28,6 @@
 				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="System.Web.Mvc" />
                 <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="System.Web.Mvc.Ajax" />
                 <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="System.Web.Mvc.Html" />
-				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="Blade.Razor.Helpers"/>
 				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="Blade.Razor"/>
 				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="System.Collections.Generic" />
 				<add xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" namespace="System.Linq" />

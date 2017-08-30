@@ -36,9 +36,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Sitecore.Buckets">
-      <HintPath>..\..\Dependencies\Libraries\Sitecore\Sitecore.Buckets.dll</HintPath>
-    </Reference>
     <Reference Include="Sitecore.ContentSearch">
       <HintPath>..\..\Dependencies\Libraries\Sitecore\Sitecore.ContentSearch.dll</HintPath>
     </Reference>

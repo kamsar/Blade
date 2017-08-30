@@ -17,7 +17,7 @@ namespace Blade.Razor
 		/// <summary>
 		/// Checks if the page is in inline edit mode (by an author)
 		/// </summary>
-		public bool IsEditing { get { return Sitecore.Context.PageMode.IsPageEditor; } }
+		public bool IsEditing { get { return Sitecore.Context.PageMode.IsExperienceEditor; } }
 
 		/// <summary>
 		/// Checks if the page is being viewed in preview mode

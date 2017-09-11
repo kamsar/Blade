@@ -32,7 +32,7 @@ namespace Blade.Views
 		/// <summary>
 		/// Checks if the page is in inline edit mode (by an author)
 		/// </summary>
-		protected bool IsEditing { get { return Sitecore.Context.PageMode.IsPageEditor; } }
+		protected bool IsEditing { get { return Sitecore.Context.PageMode.IsExperienceEditor; } }
 
 		/// <summary>
 		/// Checks if the page is being viewed in preview mode
